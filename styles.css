@@ -36,11 +36,10 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;  /* center contents */
+  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.75rem;
 }
-
 
 .top-bar--center {
   justify-content: center;
@@ -54,10 +53,13 @@ body {
   color: #3c1c0c;
   margin: 0;
   font-weight: 800;
+  font-size: clamp(1.1rem, 5vw, 1.4rem);
+  padding: 0 50px; /* Space for back button */
 }
 
 .main-title {
-  font-size: 1.7rem;
+  font-size: clamp(1.4rem, 6vw, 1.7rem);
+  padding: 0;
 }
 
 /* Back button */
@@ -78,20 +80,23 @@ body {
   font-size: 1.3rem;
   font-weight: 700;
   color: #ffffff;
+  flex-shrink: 0;
 }
-
 
 /* HOME LAYOUT */
 
 #screen-home {
   min-height: calc(100vh - 2.4rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .home-main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: flex-start;  /* was center */
+  align-items: flex-start;
+  padding: 0 0.5rem;
 }
 
 .home-buttons {
@@ -100,7 +105,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-  margin-top: 0.2rem;       /* small nudge under title */
+  margin-top: 0.2rem;
 }
 
 .home-pill {
@@ -109,7 +114,7 @@ body {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 999px;
   padding: 0.9rem 1.3rem;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 4vw, 1.1rem);
   font-weight: 600;
   color: #3b1a0b;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
@@ -146,7 +151,7 @@ body {
 
 .home-emoji {
   position: absolute;
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
   animation: homeEmojiBurst 700ms ease-out forwards;
 }
 
@@ -187,17 +192,18 @@ body {
 }
 
 .child-pill img {
-  width: 54px;
-  height: 54px;
+  width: clamp(48px, 12vw, 54px);
+  height: clamp(48px, 12vw, 54px);
   border-radius: 50%;
   object-fit: cover;
   margin-right: 0.75rem;
   background: #ddd;
   border: 3px solid rgba(255, 255, 255, 0.95);
+  flex-shrink: 0;
 }
 
 .child-pill span {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 4vw, 1.05rem);
   font-weight: 600;
   color: #3b1a0b;
 }
@@ -221,22 +227,26 @@ body {
   box-shadow: none;
 }
 
-/* Wheel container */
+/* Wheel container - FIXED FOR MOBILE */
 
 .wheel-container {
   position: relative;
   margin: 1.4rem auto 0.7rem;
-  width: 260px;
-  height: 260px;
+  width: min(280px, 85vw);
+  height: min(280px, 85vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Cartoon wreath + glow */
+/* Cartoon wreath + glow - FIXED SIZE */
 
 .wreath {
   position: relative;
-  width: 320px;
-  height: 320px;
-  margin: 0 auto 1.5rem;
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  max-height: 320px;
 
   /* Use your actual wreath image */
   background-image: url("images/wreath.png");
@@ -244,17 +254,9 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 
-  opacity: 1;                      /* make sure it's not faded */
-  filter: none;                    /* just in case */
-
-   /* tiny visual nudge to the left */
-  /*transform: translateX(-150px);*/
-
-  /* No inner fill/extra circle 
-  border-radius: 0;
-  background-color: transparent;*/
+  opacity: 1;
+  filter: none;
 }
-
 
 @keyframes wreathSlowSpin {
   0% {
@@ -269,6 +271,9 @@ body {
 
 .wreath-inner-glow {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 72%;
   height: 72%;
   border-radius: 50%;
@@ -279,7 +284,10 @@ body {
 /* Faces around wreath */
 
 .ferris-wheel {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
   border-radius: 50%;
@@ -288,8 +296,8 @@ body {
 
 .ferris-wheel .wheel-child {
   position: absolute;
-  width: 74px;
-  height: 74px;
+  width: clamp(60px, 15vw, 74px);
+  height: clamp(60px, 15vw, 74px);
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
@@ -304,15 +312,12 @@ body {
 }
 
 .wreath {
-  /* make sure the wreath itself is NOT rotating */
   animation: none !important;
 }
 
 .wheel-child img {
-  /* make sure the faces aren't spinning by themselves */
   animation: none !important;
 }
-
 
 /* Horizontal carousel */
 
@@ -332,9 +337,9 @@ body {
 
 .carousel-child {
   flex: 0 0 auto;
-  width: 74px;
-  height: 74px;
-  margin: 0 8px;
+  width: clamp(60px, 15vw, 74px);
+  height: clamp(60px, 15vw, 74px);
+  margin: 0 clamp(6px, 2vw, 8px);
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
@@ -356,7 +361,7 @@ body {
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
   border: none;
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 4vw, 1.05rem);
   font-weight: 600;
   background: #fff5d0;
   color: #5a2a0f;
@@ -383,8 +388,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: clamp(0.6rem, 3vw, 1rem);
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
 .result-child {
@@ -394,8 +400,8 @@ body {
 }
 
 .result-child img {
-  width: 80px;
-  height: 80px;
+  width: clamp(70px, 18vw, 80px);
+  height: clamp(70px, 18vw, 80px);
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
@@ -407,18 +413,20 @@ body {
   margin-top: 0.4rem;
   font-weight: 600;
   color: #3b1a0b;
+  font-size: clamp(0.9rem, 4vw, 1rem);
 }
 
 .result-arrow {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 6vw, 2rem);
   color: #fff;
 }
 
 .result-text {
   margin-top: 1rem;
   text-align: center;
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 4vw, 1.05rem);
   color: #3b1a0b;
+  padding: 0 1rem;
 }
 
 /* Results overview */
@@ -436,6 +444,7 @@ body {
   border: none;
   background: rgba(255, 255, 255, 0.7);
   font-weight: 600;
+  font-size: clamp(0.9rem, 4vw, 1rem);
   color: #5a2a0f;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
@@ -464,7 +473,8 @@ body {
 .results-row {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: clamp(0.5rem, 2vw, 0.7rem);
+  flex-wrap: wrap;
 }
 
 .results-row + .results-row {
@@ -472,12 +482,13 @@ body {
 }
 
 .results-avatar {
-  width: 40px;
-  height: 40px;
+  width: clamp(36px, 10vw, 40px);
+  height: clamp(36px, 10vw, 40px);
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid rgba(255, 255, 255, 0.95);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
 }
 
 .results-avatar img {
@@ -489,10 +500,11 @@ body {
 .results-text-main {
   font-weight: 600;
   color: #3b1a0b;
+  font-size: clamp(0.9rem, 4vw, 1rem);
 }
 
 .results-text-sub {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 3.5vw, 0.9rem);
   color: #6b3a1b;
 }
 
@@ -538,7 +550,7 @@ body {
 
 .admin-section h2 {
   margin: 0 0 0.6rem 0;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 4vw, 1rem);
   color: #4b1f0b;
 }
 
@@ -547,7 +559,7 @@ body {
   border: none;
   border-radius: 999px;
   padding: 0.6rem 0.9rem;
-  font-size: 0.98rem;
+  font-size: clamp(0.9rem, 3.5vw, 0.98rem);
   font-weight: 600;
   margin-bottom: 0.45rem;
   background: #fff5d0;
@@ -583,7 +595,7 @@ body {
   border-radius: 999px;
   border: none;
   padding: 0.4rem 0.6rem;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 3.5vw, 0.95rem);
   font-weight: 600;
   background: rgba(255,255,255,0.8);
   color: #5a2a0f;
@@ -605,7 +617,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.4rem;
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 3.5vw, 0.95rem);
   color: #3b1a0b;
 }
 
@@ -613,14 +625,15 @@ body {
   border-radius: 999px;
   border: none;
   padding: 0.2rem 0.6rem;
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 3vw, 0.85rem);
   background: #ffe8b3;
   color: #5a2a0f;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .admin-status {
-  font-size: 0.9rem;
+  font-size: clamp(0.85rem, 3.5vw, 0.9rem);
   color: #3b1a0b;
   text-align: center;
   min-height: 1.2rem;
@@ -636,6 +649,7 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 20;
+  padding: 1rem;
 }
 
 .share-overlay.active {
@@ -656,12 +670,10 @@ body {
   padding: 0.75rem 0.75rem 1rem;
   box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   text-align: center;
-
   max-width: min(420px, 90vw);
   max-height: 90vh;
-  overflow-y: auto; /* allow scroll inside the card if needed */
+  overflow-y: auto;
 }
-
 
 .share-card img {
   max-width: 100%;
@@ -672,20 +684,38 @@ body {
 }
 
 .share-hint {
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 3.5vw, 0.85rem);
   color: #5a2a0f;
   margin: 0.3rem 0 0.5rem;
 }
 
 /* Extra spacing under the wreath on the spin screen */
 #screen-spin .primary-btn {
-  margin-top: 2.8rem;   /* tweak this value to taste */
+  margin-top: 2.8rem;
 }
 
-#app {
-  outline: 1px dashed red;
+/* Mobile-specific adjustments */
+@media (max-width: 400px) {
+  #app {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+  
+  .home-buttons {
+    gap: 0.9rem;
+  }
+  
+  .child-item + .child-item {
+    margin-top: 0.6rem;
+  }
 }
 
-.wreath {
-  outline: 1px solid blue;
+/* Very small screens */
+@media (max-width: 320px) {
+  .result-pair {
+    gap: 0.4rem;
+  }
+  
+  .results-row {
+    gap: 0.4rem;
+  }
 }
