@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Family Gift Exchange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div id="app">
+
+    <!-- HOME: choose kids / parents / view results -->
+    <section id="screen-home" class="screen active">
+      <header class="top-bar top-bar--center">
+        <h1 class="title main-title">Family Gift Exchange</h1>
+      </header>
+
+      <div class="home-main">
+        <div class="home-buttons">
+          <button class="home-pill" data-home-action="kids">
+            Kids
+          </button>
+          <button class="home-pill" data-home-action="adults">
+            Parents
+          </button>
+          <button class="home-pill" data-home-action="results">
+            View Results
+          </button>
+        </div>
+      </div>
+
+      <div id="homeAnimationLayer" class="animation-layer"></div>
+    </section>
+
+    <!-- PICKER: who's drawing? -->
+    <section id="screen-picker" class="screen">
+      <header class="top-bar">
+        <button class="back-btn" data-back>&larr;</button>
+        <h1 class="title">Who’s drawing?</h1>
+      </header>
+
+      <ul id="personList" class="child-list">
+        <!-- Filled by JS -->
+      </ul>
+    </section>
+
+    <!-- SPIN: wreath + carousel -->
+    <section id="screen-spin" class="screen">
+      <header class="top-bar">
+        <button class="back-btn" data-back>&larr;</button>
+        <h1 class="title">Spin the wheel!</h1>
+      </header>
+
+      <div class="wheel-container">
+        <div class="wreath">
+          <div class="wreath-inner-glow"></div>
+          <div id="ferrisWheel" class="ferris-wheel">
+            <!-- Faces around wreath -->
+          </div>
+        </div>
+
+        <div id="carousel" class="carousel">
+          <div id="carouselTrack" class="carousel-track">
+            <!-- Faces sliding left-right -->
+          </div>
+        </div>
+      </div>
+
+      <button id="spinButton" class="primary-btn">Spin</button>
+    </section>
+
+    <!-- RESULT: one drawer -> one recipient -->
+    <section id="screen-result" class="screen">
+      <header class="top-bar">
+        <button class="back-btn" data-back>&larr;</button>
+        <h1 class="title">You got someone!</h1>
+      </header>
+
+      <div class="result-pair">
+        <div class="result-child drawer">
+          <img id="drawerImg" src="" alt="">
+          <p id="drawerName"></p>
+        </div>
+
+        <div class="result-arrow">➜</div>
+
+        <div class="result-child recipient">
+          <img id="recipientImg" src="" alt="">
+          <p id="recipientName"></p>
+        </div>
+      </div>
+
+      <p id="resultText" class="result-text"></p>
+
+      <button id="doneButton" class="primary-btn">Done</button>
+    </section>
+
+    <!-- RESULTS OVERVIEW -->
+    <section id="screen-resultsOverview" class="screen">
+      <header class="top-bar">
+        <button class="back-btn" data-back>&larr;</button>
+        <h1 class="title">Results</h1>
+      </header>
+
+      <div class="results-tabs">
+        <button class="results-tab results-tab--active" data-results-tab="kids">
+          Kids
+        </button>
+        <button class="results-tab" data-results-tab="adults">
+          Parents
+        </button>
+      </div>
+
+      <div id="resultsKids" class="results-list active">
+        <!-- Filled by JS -->
+      </div>
+
+      <div id="resultsAdults" class="results-list">
+        <!-- Filled by JS -->
+      </div>
+    </section>
+
+        <!-- ADMIN -->
+    <section id="screen-admin" class="screen">
+      <header class="top-bar">
+        <button class="back-btn" data-back>&larr;</button>
+        <h1 class="title">Admin Tools</h1>
+      </header>
+
+      <div class="admin-section">
+        <h2>Quick resets</h2>
+        <button class="admin-btn" data-admin-action="reset-kids">
+          Reset kids assignments
+        </button>
+        <button class="admin-btn" data-admin-action="reset-adults">
+          Reset parents assignments
+        </button>
+        <button class="admin-btn admin-btn--danger" data-admin-action="reset-all">
+          Reset ALL assignments
+        </button>
+      </div>
+
+      <div class="admin-section">
+        <h2>Reset one drawer</h2>
+        <div class="admin-pill-toggle">
+          <button class="admin-pill admin-pill--active" data-admin-group="kids">Kids</button>
+          <button class="admin-pill" data-admin-group="adults">Parents</button>
+        </div>
+        <div id="adminDrawerList" class="admin-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="admin-section">
+        <h2>Family cards</h2>
+        <p class="results-text-sub" style="margin-bottom:0.4rem;">
+          Choose a style, then preview a card for each family. Save the image and send it by text.
+        </p>
+        <div class="admin-pill-toggle">
+          <button class="admin-pill admin-pill--active" data-card-style="simple">Simple</button>
+          <button class="admin-pill" data-card-style="festive">Festive</button>
+        </div>
+        <div id="adminFamilyCards" class="admin-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <p id="adminStatus" class="admin-status"></p>
+    </section>
+
+        <!-- Share / card preview overlay -->
+    <div id="shareOverlay" class="share-overlay">
+      <div class="share-card-wrapper">
+        <div class="share-card">
+          <img id="shareCardImage" alt="Family gift card preview">
+          <p class="share-hint">
+            Long-press or tap-and-hold to save this image, then send it in a text.
+          </p>
+          <button id="shareCloseBtn" class="primary-btn" style="margin-top:0.3rem;">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Off-screen canvas for rendering cards -->
+    <canvas id="familyCardCanvas" width="600" height="900" style="display:none;"></canvas>
+
+    <!-- Confetti layer overlay (global) -->
+    <div id="confettiLayer" class="confetti-layer"></div>
+
+  </div>
+</body>
+</html>
