@@ -87,8 +87,6 @@ body {
 
 #screen-home {
   min-height: calc(100vh - 2.4rem);
-  display: flex;
-  flex-direction: column;
 }
 
 .home-main {
@@ -719,3 +717,4 @@ body {
     gap: 0.4rem;
   }
 }
+
