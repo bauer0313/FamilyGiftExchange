@@ -730,8 +730,8 @@ function setupWheelForCurrentGroup() {
 
     div.style.left = "50%";
     div.style.top = "50%";
-    div.style.transform =
-    `translate(-50%, -50%) translate(${x + offsetX}px, ${y + offsetY}px)`;
+    /*div.style.transform =
+    `translate(-50%, -50%) translate(${x + offsetX}px, ${y + offsetY}px)`;*/
 
     div.innerHTML = `<img src="${person.photoUrl}" alt="${person.name}">`;
     wheel.appendChild(div);
@@ -1281,4 +1281,5 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
