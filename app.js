@@ -713,8 +713,8 @@ function setupWheelForCurrentGroup() {
   wreathAngleOffset = 0;
 
   // tweak these if you want to nudge the ring inside the wreath
-  const offsetX = -8;       // move faces a little left
-  const offsetY = 6;        // move faces a little down
+  const offsetX = 0;       // move faces a little left
+  const offsetY = 0;        // move faces a little down
 
   // --- WREATH FACES (circle, upright) ---
   people.forEach((person, index) => {
@@ -1281,3 +1281,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
