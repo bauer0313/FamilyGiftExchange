@@ -267,7 +267,7 @@ body {
 
 /* Inner glow */
 
-.wreath-inner-glow {
+/*.wreath-inner-glow {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -277,7 +277,7 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 24px rgba(252, 211, 77, 0.9) inset;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.45), transparent 70%);
-}
+}*/
 
 /* Faces around wreath */
 
@@ -285,7 +285,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  /*transform: translate(-50%, -50%);*/
   width: 80%;
   height: 80%;
   border-radius: 50%;
@@ -717,4 +717,5 @@ body {
     gap: 0.4rem;
   }
 }
+
 
