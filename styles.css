@@ -294,8 +294,10 @@ body {
 
 .ferris-wheel .wheel-child {
   position: absolute;
-  width: clamp(60px, 15vw, 74px);
-  height: clamp(60px, 15vw, 74px);
+  width: calc(min(380px, 93vw) * 0.13);   /* 13% of wreath container, changed from clamp(60px, 15vw, 74px) */
+  height: calc(min(380px, 93vw) * 0.13);   /* 13% of wreath container, changed from clamp(60px, 15vw, 74px) */
+  min-width: 55px;
+  max-width: 75px;
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
@@ -717,6 +719,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
