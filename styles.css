@@ -243,8 +243,8 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 320px;
-  max-height: 320px;
+  max-width: 500px;  /*Changed from 320 to 500 to allow for increases made in .wheel-container*/
+  max-height: 500px; /*Changed from 320 to 500 to allow for increases made in .wheel-container*/
 
   /* Use your actual wreath image */
   background-image: url("images/wreath.png");
@@ -717,6 +717,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
