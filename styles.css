@@ -230,8 +230,8 @@ body {
 .wheel-container {
   position: relative;
   margin: 1.4rem auto 0.7rem;
-  width: min(280px, 85vw);
-  height: min(280px, 85vw);
+  width: min(360px, 90vw);  /*Changing from 280px, 85vw to 360px, 90vw*/
+  height: min(360px, 90vw); /*Changing from 280px, 85vw to 360px, 90vw*/
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,8 +241,8 @@ body {
 
 .wreath {
   position: relative;
-  width: 125%;  /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
-  height: 125%; /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
+  width: 100%;
+  height: 100%;
   max-width: 320px;
   max-height: 320px;
 
@@ -717,6 +717,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
