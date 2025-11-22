@@ -161,7 +161,7 @@ function renderAdmin() {
   if (!peopleWithAssignments.length) {
     const p = document.createElement("p");
     p.className = "results-text-sub";
-    p.textContent = "No drawers with assignments yet.";
+    p.textContent = "No assignments yet.";
     listEl.appendChild(p);
     return;
   }
@@ -822,13 +822,13 @@ function getPossibleRecipients(groupKey, drawerId) {
 
 function startSpin() {
   if (!currentGroupKey || !currentDrawerId) {
-    alert("Please go back and pick who is drawing first.");
+    alert("Please go back and select who is drawing first.");
     return;
   }
 
   const possible = getPossibleRecipients(currentGroupKey, currentDrawerId);
   if (possible.length === 0) {
-    alert("There are no valid people left for this drawer. Please contact the organizer.");
+    alert("There are no valid people left. Please contact the organizer.");
     return;
   }
 
@@ -1281,5 +1281,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
