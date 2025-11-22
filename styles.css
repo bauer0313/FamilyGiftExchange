@@ -227,7 +227,7 @@ body {
 
 /* Wheel container - FIXED FOR MOBILE */
 
-.wheel-container {
+/*.wheel-container {
   position: relative;
   margin: 1.4rem auto 0.7rem;
   width: min(280px, 85vw);
@@ -235,7 +235,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+}*/
 
 /* Cartoon wreath + glow - FIXED SIZE */
 
@@ -717,6 +717,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
