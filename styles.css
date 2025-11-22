@@ -241,8 +241,8 @@ body {
 
 .wreath {
   position: relative;
-  width: 110%;  /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
-  height: 110%; /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
+  width: 125%;  /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
+  height: 125%; /*Changed from 100% to 110% so that the pictures could stay same size and make wreath more visible*/
   max-width: 320px;
   max-height: 320px;
 
@@ -717,6 +717,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
