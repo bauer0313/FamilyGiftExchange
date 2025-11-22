@@ -283,8 +283,8 @@ body {
 
 .ferris-wheel {
   position: relative;
-  top: 25%;
-  left: 25%;
+  top: 15%;
+  left: 15%;
   /*transform: translate(-50%, -50%);*/
   width: 80%;
   height: 80%;
@@ -717,6 +717,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
