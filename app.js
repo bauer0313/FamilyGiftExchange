@@ -728,6 +728,10 @@ function setupWheelForCurrentGroup() {
     div.dataset.offsetX = String(offsetX);
     div.dataset.offsetY = String(offsetY);
 
+    const faceSize = wreathRadius * 0.6;  // 60% of the orbit radius
+    div.style.width = `${faceSize}px`;    // These added for sizing
+    div.style.height = `${faceSize}px`;   // These added for sizing
+
     div.style.left = "50%";
     div.style.top = "50%";
     /*div.style.transform =
@@ -1281,6 +1285,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
 
