@@ -709,7 +709,10 @@ function setupWheelForCurrentGroup() {
   carouselTrack.style.transform = "translateX(0)";
 
   const count = people.length;
-  wreathRadius = 120;       // was 90, then was 100
+  const wheelContainer = wheel.closest('.wheel-container');
+  const containerSize = wheelContainer ? wheelContainer.offsetWidth : 260;
+  wreathRadius = containerSize * (120 / 260);
+  /* wreathRadius = 120;   */    // was 90, then was 100
   wreathAngleOffset = 0;
 
   // tweak these if you want to nudge the ring inside the wreath
@@ -1285,6 +1288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
 
