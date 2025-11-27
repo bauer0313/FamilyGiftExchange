@@ -74,6 +74,12 @@ const groups = {
         name: "Beth & Calvin",
         photoUrl: "images/Beth_Calvin.jpg",
         phoneNumber: ""
+      },
+      {
+        id: "family5",
+        name: "Tom",
+        photoUrl: "images/Tom.jpg",
+        phoneNumber: ""
       }
     ]
   }
@@ -1288,6 +1294,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
 
