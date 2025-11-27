@@ -79,7 +79,8 @@ const groups = {
         id: "family5",
         name: "Tom",
         photoUrl: "images/Tom.jpg",
-        phoneNumber: ""
+        phoneNumber: "",
+        isSingle: true // <-- explicit flag so wording can use "has" instead of "have"
       }
     ]
   }
@@ -281,11 +282,13 @@ async function buildFamilyCardImage(familyId) {
     const adultRecipient = adultsGroup.people.find(
       (p) => p.id === adultAssignment.recipientId
     );
+    const verb = couple.isSingle ? "has picked" : "have picked";
     adultLine = adultRecipient
-      ? `${couple.name} have picked ${adultRecipient.name}.`
-      : `${couple.name} have picked someone, but recipient wasn't found.`;
+      ? `${couple.name} ${verb} ${adultRecipient.name}.`
+      : `${couple.name} ${verb} someone, but recipient wasn't found.`;
   } else {
-    adultLine = `${couple.name} have not picked anyone yet.`;
+    const notVerb = couple.isSingle ? "has not picked" : "have not picked";
+    adultLine = `${couple.name} ${notVerb} anyone yet.`;
   }
 
   const kids = kidsGroup.people.filter(
@@ -608,6 +611,15 @@ function getCurrentGroup() {
 function navigateTo(screenId) {
   currentScreen = screenId;
   renderScreen(screenId);
+}
+
+// Helper verbs for proper singular/plural wording for parents/couples
+function getPickVerb(person) {
+  // returns "has picked" for single-person entries, otherwise "have picked"
+  return person && person.isSingle ? "has picked" : "have picked";
+}
+function getNotPickedVerb(person) {
+  return person && person.isSingle ? "has not picked" : "have not picked";
 }
 
 function renderScreen(screenId) {
@@ -969,7 +981,10 @@ function populateResultFromLast() {
   recipientImg.alt = recipient.name;
   recipientName.textContent = recipient.name;
 
-  resultText.textContent = `${drawer.name} has picked ${recipient.name} for the gift exchange.`;
+  // Use proper singular/plural verb depending on whether drawer is a single person
+  const verb = drawer.isSingle ? "has picked" : "has picked"; // keep "has picked" structure for result sentence but handle plurality on other screens
+  // NOTE: we keep "has picked" here to preserve the friendly tone; the results overview and cards below use the explicit have/has choice.
+  resultText.textContent = `${drawer.name} ${drawer.isSingle ? "has" : "have"} picked ${recipient.name} for the gift exchange.`;
 }
 
 // ---------- CONFETTI ----------
@@ -1048,6 +1063,8 @@ function renderResultsOverview() {
     const recipient = adultsGroup.people.find((p) => p.id === a.recipientId);
     if (!drawer || !recipient) return;
 
+    const verb = drawer.isSingle ? "has picked" : "have picked";
+
     const card = document.createElement("div");
     card.className = "results-card";
     card.innerHTML = `
@@ -1057,7 +1074,7 @@ function renderResultsOverview() {
         </div>
         <div>
           <div class="results-text-main">${drawer.name}</div>
-          <div class="results-text-sub">have picked</div>
+          <div class="results-text-sub">${verb}</div>
         </div>
         <div class="results-avatar">
           <img src="${recipient.photoUrl}" alt="${recipient.name}">
@@ -1294,13 +1311,3 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
-
-
-
-
-
-
-
-
-
-
