@@ -744,6 +744,9 @@ function setupWheelForCurrentGroup() {
   const offsetX = 0;       // move faces a little left
   const offsetY = 0;        // move faces a little down
 
+  // Compute face size once (use square so we can make images perfectly circular)
+  const faceSize = wreathRadius * 0.5;  // 50% of orbit radius
+
   // --- WREATH FACES (circle, upright) ---
   people.forEach((person, index) => {
     const baseAngle = (index / count) * 2 * Math.PI;
@@ -756,16 +759,19 @@ function setupWheelForCurrentGroup() {
     div.dataset.offsetX = String(offsetX);
     div.dataset.offsetY = String(offsetY);
 
-    const faceSize = wreathRadius * 0.5;  // 60% of the orbit radius, changed to 50%
-    div.style.width = `${faceSize}px`;    // These added for sizing
-    div.style.height = `${faceSize}px`;   // These added for sizing
-
+    // Ensure faces are square and clipped to a circle
+    div.style.width = `${faceSize}px`;
+    div.style.height = `${faceSize}px`;
     div.style.left = "50%";
     div.style.top = "50%";
-    /*div.style.transform =
-    `translate(-50%, -50%) translate(${x + offsetX}px, ${y + offsetY}px)`;*/
+    div.style.overflow = "hidden";
+    div.style.borderRadius = "50%";
+    div.style.display = "flex";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
 
-    div.innerHTML = `<img src="${person.photoUrl}" alt="${person.name}">`;
+    // image fills the square and is cover-cropped so it stays circular and not distorted
+    div.innerHTML = `<img src="${person.photoUrl}" alt="${person.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;">`;
     wheel.appendChild(div);
   });
 
@@ -774,7 +780,17 @@ function setupWheelForCurrentGroup() {
   all.forEach((person) => {
     const item = document.createElement("div");
     item.className = "carousel-child"; // match the CSS
-    item.innerHTML = `<img src="${person.photoUrl}" alt="${person.name}">`;
+
+    // Make carousel items square and circular to match wreath faces
+    item.style.width = `${faceSize}px`;
+    item.style.height = `${faceSize}px`;
+    item.style.overflow = "hidden";
+    item.style.borderRadius = "50%";
+    item.style.display = "flex";
+    item.style.alignItems = "center";
+    item.style.justifyContent = "center";
+
+    item.innerHTML = `<img src="${person.photoUrl}" alt="${person.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;">`;
     carouselTrack.appendChild(item);
   });
 
