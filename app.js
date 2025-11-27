@@ -80,7 +80,7 @@ const groups = {
         name: "Tom",
         photoUrl: "images/Tom.jpg",
         phoneNumber: "",
-        isSingle: true // <-- explicit flag so wording can use "has" instead of "have"
+        isSingle: true // explicit flag so wording can use "has" instead of "have"
       }
     ]
   }
@@ -274,6 +274,10 @@ async function buildFamilyCardImage(familyId) {
   const couple = adultsGroup.people.find((p) => p.id === familyId);
   if (!couple) return "";
 
+  // Use central verb helpers to ensure consistent wording
+  const verb = pickVerb("adults", couple);
+  const notVerb = notPickedVerb("adults", couple);
+
   const adultAssignment = assignmentsByGroup.adults.find(
     (a) => a.drawerId === familyId
   );
@@ -282,12 +286,10 @@ async function buildFamilyCardImage(familyId) {
     const adultRecipient = adultsGroup.people.find(
       (p) => p.id === adultAssignment.recipientId
     );
-    const verb = couple.isSingle ? "has picked" : "have picked";
     adultLine = adultRecipient
       ? `${couple.name} ${verb} ${adultRecipient.name}.`
       : `${couple.name} ${verb} someone, but recipient wasn't found.`;
   } else {
-    const notVerb = couple.isSingle ? "has not picked" : "have not picked";
     adultLine = `${couple.name} ${notVerb} anyone yet.`;
   }
 
@@ -305,14 +307,14 @@ async function buildFamilyCardImage(familyId) {
         (p) => p.id === childAssignment.recipientId
       );
       if (kidRecipient) {
-        kidLines.push(`${child.name} has picked ${kidRecipient.name}.`);
+        kidLines.push(`${child.name} ${pickVerb("kids", child)} ${kidRecipient.name}.`);
       } else {
         kidLines.push(
-          `${child.name} has picked someone, but recipient wasn't found.`
+          `${child.name} ${pickVerb("kids", child)} someone, but recipient wasn't found.`
         );
       }
     } else {
-      kidLines.push(`${child.name} has not picked anyone yet.`);
+      kidLines.push(`${child.name} ${notPickedVerb("kids", child)}.`);
     }
   });
 
@@ -613,12 +615,17 @@ function navigateTo(screenId) {
   renderScreen(screenId);
 }
 
-// Helper verbs for proper singular/plural wording for parents/couples
-function getPickVerb(person) {
-  // returns "has picked" for single-person entries, otherwise "have picked"
+// ---------- VERB HELPERS ----------
+// Centralize logic for "has/has not" vs "have/have not" so wording is consistent everywhere.
+// Rules:
+// - For kids group, always use singular ("has picked", "has not picked") because kids are individuals.
+// - For adults group, use person.isSingle === true to select singular ("has picked"), otherwise plural ("have picked").
+function pickVerb(groupKey, person) {
+  if (groupKey === "kids") return "has picked";
   return person && person.isSingle ? "has picked" : "have picked";
 }
-function getNotPickedVerb(person) {
+function notPickedVerb(groupKey, person) {
+  if (groupKey === "kids") return "has not picked";
   return person && person.isSingle ? "has not picked" : "have not picked";
 }
 
@@ -981,10 +988,9 @@ function populateResultFromLast() {
   recipientImg.alt = recipient.name;
   recipientName.textContent = recipient.name;
 
-  // Use proper singular/plural verb depending on whether drawer is a single person
-  const verb = drawer.isSingle ? "has picked" : "has picked"; // keep "has picked" structure for result sentence but handle plurality on other screens
-  // NOTE: we keep "has picked" here to preserve the friendly tone; the results overview and cards below use the explicit have/has choice.
-  resultText.textContent = `${drawer.name} ${drawer.isSingle ? "has" : "have"} picked ${recipient.name} for the gift exchange.`;
+  // Use central helper to pick the correct verb
+  const verb = pickVerb(groupKey, drawer);
+  resultText.textContent = `${drawer.name} ${verb} ${recipient.name} for the gift exchange.`;
 }
 
 // ---------- CONFETTI ----------
@@ -1034,6 +1040,8 @@ function renderResultsOverview() {
     const recipient = kidsGroup.people.find((p) => p.id === a.recipientId);
     if (!drawer || !recipient) return;
 
+    const verb = pickVerb("kids", drawer);
+
     const card = document.createElement("div");
     card.className = "results-card";
     card.innerHTML = `
@@ -1043,7 +1051,7 @@ function renderResultsOverview() {
         </div>
         <div>
           <div class="results-text-main">${drawer.name}</div>
-          <div class="results-text-sub">has picked</div>
+          <div class="results-text-sub">${verb}</div>
         </div>
         <div class="results-avatar">
           <img src="${recipient.photoUrl}" alt="${recipient.name}">
@@ -1063,7 +1071,7 @@ function renderResultsOverview() {
     const recipient = adultsGroup.people.find((p) => p.id === a.recipientId);
     if (!drawer || !recipient) return;
 
-    const verb = drawer.isSingle ? "has picked" : "have picked";
+    const verb = pickVerb("adults", drawer);
 
     const card = document.createElement("div");
     card.className = "results-card";
