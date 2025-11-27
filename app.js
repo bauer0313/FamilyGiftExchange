@@ -710,7 +710,7 @@ function setupWheelForCurrentGroup() {
 
   const count = people.length;
   const wheelContainer = wheel.closest('.wheel-container');
-  const containerSize = wheelContainer ? wheelContainer.offsetWidth : 260;
+  const containerSize = wheelContainer ? wheelContainer.clientWidth : 260;
   wreathRadius = containerSize * (120 / 260);
   /* wreathRadius = 120;   */    // was 90, then was 100
   wreathAngleOffset = 0;
@@ -1288,6 +1288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
 
