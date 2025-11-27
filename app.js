@@ -90,7 +90,7 @@ const assignmentsByGroup = {
 // Adults map left empty but ready for future use.
 const disallowedPairsByGroup = {
   kids: {
-    // "Benson": ["Lexi"]
+    "Colton": ["Aubrey"]
   },
   adults: {
     // "family1": ["family2"]
@@ -1288,6 +1288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial render
   renderScreen("home");
 });
+
 
 
 
