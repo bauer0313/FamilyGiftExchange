@@ -283,8 +283,8 @@ body {
 
 .ferris-wheel {
   position: relative;
-  top: 0%;  /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
-  left: 0%; /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
+  top: 25%;  /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
+  left: 25%; /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
   /*transform: translate(-50%, -50%);*/
   width: 50%;
   height: 50%;
@@ -720,6 +720,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
