@@ -280,24 +280,60 @@ body {
 }*/
 
 /* Faces around wreath */
-
+/*
 .ferris-wheel {
   position: relative;
   top: 25%;  /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
-  left: 25%; /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
+  /*left: 25%; /*These were both initially at 50%, then went down to 25% and then 10% for testing to get to the correct position*/
   /*transform: translate(-50%, -50%);*/
-  width: 50%;
+ /* width: 50%;
   height: 50%;
   border-radius: 0%; /*Changed from 50%*/
+ /* transition: opacity 0.4s ease, transform 0.4s ease;
+}
+*/
+/* Replaces the existing .ferris-wheel and .ferris-wheel .wheel-child blocks with this */
+
+.ferris-wheel {
+  position: absolute;            /* position it over the wreath cleanly */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* truly center */
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Children are centered at 50%/50% and sized relative to the ferris-wheel */
+.ferris-wheel .wheel-child {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 12%;            /* relative to ferris-wheel; tweak to taste */
+  height: 12%;
+  min-width: 40px;       /* optional bounds */
+  max-width: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  background: #fff;
+  transform-origin: 0% 50%; /* rotate/translate will use ferris-wheel center */
+}
+
+.ferris-wheel .wheel-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/**
 .ferris-wheel .wheel-child {
   position: absolute;
   width: calc(min(380px, 93vw) * 0.13);   // 13% of wreath container, changed from clamp(60px, 15vw, 74px)
   height: calc(min(380px, 93vw) * 0.13);  /* 13% of wreath container, changed from clamp(60px, 15vw, 74px) */
   
-  min-width: 55px;
+/*  min-width: 55px;
   max-width: 75px;
   border-radius: 50%;
   overflow: hidden;
@@ -311,7 +347,7 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
+**/
 .wreath {
   animation: none !important;
 }
@@ -720,6 +756,7 @@ body {
     gap: 0.4rem;
   }
 }
+
 
 
 
