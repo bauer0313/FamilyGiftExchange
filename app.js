@@ -821,8 +821,8 @@ function animateWreath() {
     const offsetX = parseFloat(div.dataset.offsetX || "0");
     const offsetY = parseFloat(div.dataset.offsetY || "0");
 
-    div.style.transform =
-      `translate(-50%, -50%) translate(${x + offsetX}px, ${y + offsetY}px)`;
+    /*div.style.transform =
+      `translate(-50%, -50%) translate(${x + offsetX}px, ${y + offsetY}px)`;*/
   });
 
   wreathAnimationId = requestAnimationFrame(animateWreath);
