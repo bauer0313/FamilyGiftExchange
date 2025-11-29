@@ -53,7 +53,13 @@ function setupWheelForCurrentGroup() {
   const wheel = document.getElementById("ferrisWheel");
   const carousel = document.getElementById("carousel");
   const carouselTrack = document.getElementById("carouselTrack");
-  const wheelContainer = wheel.closest('.wheel-container');
+
+  // If required elements are missing, bail out gracefully rather than throwing.
+  if (!wheel || !carousel || !carouselTrack) {
+    return;
+  }
+
+  const wheelContainer = wheel.closest('.wheel-container') || document.querySelector('.wheel-container') || document.body;
 
   // clear previous
   wheel.innerHTML = "";
